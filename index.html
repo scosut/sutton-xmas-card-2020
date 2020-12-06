@@ -8,6 +8,7 @@
 	.container {
 		height: 480px;
 		margin: auto;
+		position: relative;
 		width: 636px;		
 	}
 	
@@ -15,13 +16,42 @@
 		height: 100%;
 		width: 100%;
 	}
+	
+	#hotspot {
+		cursor: pointer;
+		height: 60px;
+		left: 80px;
+		position: absolute;		
+		top: 325px;
+		width: 60px;
+	}
 </style>
 <body>
 	<div class="container">
-		<video controls>
+		<video id="myVideo" poster="video_cover.jpg">
 			<source src="sutton_xmas_video_2020.mp4" type="video/mp4">
 			Your browser does not support the video tag.
 		</video>	
+		<div id="hotspot"></div>
 	</div>
+	<script>
+		(function() {
+			function playVideo(vid, e) {
+				vid.play();
+				e.target.style.display = "none";
+			}
+
+			function events() {
+				var hotspot = document.getElementById("hotspot");
+				var myVideo = document.getElementById("myVideo");
+
+				if (hotspot && myVideo) {
+					hotspot.addEventListener("click", playVideo.bind(this, myVideo));
+				}	
+			}
+
+			events();	
+		})();		
+	</script>
 </body>
 </html>
